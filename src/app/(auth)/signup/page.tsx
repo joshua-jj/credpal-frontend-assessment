@@ -24,8 +24,8 @@ const SignUpPage = () => {
     defaultValues,
     resolver: zodResolver(signupSchema),
   });
+
   const {
-    register,
     formState: { errors },
   } = form;
 
@@ -39,7 +39,7 @@ const SignUpPage = () => {
     <div className="px-[8rem] pt-[8rem]">
       <p className="text-4xl font-semibold">Create an account</p>
       <p className="text-muted-foreground mt-2">
-        Already have an account?{" "}
+        Already have an account? {" "}
         <Link href="/signin" className="underline">
           Login
         </Link>
