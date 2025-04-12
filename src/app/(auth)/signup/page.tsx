@@ -1,10 +1,11 @@
 "use client";
+import PasswordInput from "@/components/PasswordInput";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { SignupFormData } from "@/features/signup/types";
-import { signupSchema } from "@/schemas/signin";
+import { signupSchema } from "@/schemas/signup";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useState } from "react";
@@ -88,7 +89,7 @@ const SignUpPage = () => {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input
+                      <PasswordInput
                         {...field}
                         className={`w-full border ${errors.fullName ? "border-destructive" : "border-input"}`}
                         placeholder="Enter Password"
@@ -109,7 +110,8 @@ const SignUpPage = () => {
             <div className="mt-8">
               <Button
                 type="submit"
-                className="disabled:bg-primary-green h-[3rem] w-full rounded-[50px] bg-primary disabled:border-transparent"
+                className="disabled:bg-primary-green bg-primary h-[3rem] w-full rounded-[50px] disabled:border-transparent"
+                disabled={!termsAgreed || form.formState.isSubmitting}
               >
                 Register
                 {/* {loggingDnp ? <ClipLoader color={"#fff"} size={30} /> : "Submit"} */}
