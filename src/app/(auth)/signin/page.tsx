@@ -1,32 +1,28 @@
 "use client";
 import PasswordInput from "@/components/PasswordInput";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { SignupFormData } from "@/features/auth/types";
-import { signupSchema } from "@/schemas/signup";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { SigninFormData } from "@/features/auth/types";
+import { useSignIn } from "@/hooks/tansack-query/mutations/use-auth";
 import Link from "next/link";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const SignInPage = () => {
+  const { signInLoading, signInUser } = useSignIn();
+
   const defaultValues = {
-    fullName: "",
     email: "",
     password: "",
   };
 
   const form = useForm({ defaultValues });
-  const {
-    formState: { errors },
-    getValues,
-  } = form;
+  const { getValues } = form;
 
-  const loginButtonDisabled = !getValues("email") || !getValues("password")
+  const loginButtonDisabled = !getValues("email") || !getValues("password");
 
-  const handleSubmit = (data: SignupFormData) => {};
+  const handleSubmit = (data: SigninFormData) => {};
 
   return (
     <div className="px-[8rem] pt-[8rem]">
@@ -78,8 +74,7 @@ const SignInPage = () => {
                 className="disabled:bg-primary-green bg-primary h-[3rem] w-full rounded-[50px] disabled:border-transparent"
                 disabled={loginButtonDisabled}
               >
-                Log in
-                {/* {loggingDnp ? <ClipLoader color={"#fff"} size={30} /> : "Submit"} */}
+                {signInLoading ? <ClipLoader color={"#fff"} size={25} /> : "Login"}
               </Button>
             </div>
           </form>
