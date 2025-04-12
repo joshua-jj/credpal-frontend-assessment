@@ -1,7 +1,9 @@
+import { Toaster } from "@/components/ui/sonner";
+import Providers from "@/providers";
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { inter } from "./fonts";
 import "./globals.css";
-import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Beam",
@@ -16,8 +18,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        {children}
-        <Toaster position="top-right" />
+        <Providers>
+          <Suspense>{children}</Suspense>
+          <Toaster position="top-right" />
+        </Providers>
       </body>
     </html>
   );

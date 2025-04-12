@@ -5,14 +5,17 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { SignupFormData } from "@/features/auth/types";
+import { useSignUp } from "@/hooks/tansack-query/mutations/use-auth";
 import { signupSchema } from "@/schemas/signup";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const SignUpPage = () => {
   const [termsAgreed, setTermsAgreed] = useState(false);
+  const { signUpLoading, signUpUser } = useSignUp();
 
   const defaultValues = {
     fullName: "",
@@ -31,7 +34,13 @@ const SignUpPage = () => {
 
   const signupButtonDisabled = !termsAgreed || form.formState.isSubmitting;
 
-  const handleSubmit = (data: SignupFormData) => {};
+  const handleSubmit = (data: SignupFormData) => {
+    signUpUser({
+      full_name: data.fullName,
+      email: data.email,
+      password: data.password,
+    });
+  };
 
   const handleTermsAgreedToggle = (checked: boolean) => {
     setTermsAgreed(checked => !checked);
@@ -115,8 +124,7 @@ const SignUpPage = () => {
                 className="disabled:bg-primary-green bg-primary h-[3rem] w-full rounded-[50px] disabled:border-transparent"
                 disabled={signupButtonDisabled}
               >
-                Register
-                {/* {loggingDnp ? <ClipLoader color={"#fff"} size={30} /> : "Submit"} */}
+                {!signUpLoading ? <ClipLoader color={"#fff"} size={30} /> : "Register"}
               </Button>
             </div>
           </form>
