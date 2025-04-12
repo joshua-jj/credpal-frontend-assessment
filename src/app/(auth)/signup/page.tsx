@@ -29,6 +29,8 @@ const SignUpPage = () => {
     formState: { errors },
   } = form;
 
+  const signupButtonDisabled = !termsAgreed || form.formState.isSubmitting;
+
   const handleSubmit = (data: SignupFormData) => {};
 
   const handleTermsAgreedToggle = (checked: boolean) => {
@@ -39,7 +41,7 @@ const SignUpPage = () => {
     <div className="px-[8rem] pt-[8rem]">
       <p className="text-4xl font-semibold">Create an account</p>
       <p className="text-muted-foreground mt-2">
-        Already have an account? {" "}
+        Already have an account?{" "}
         <Link href="/signin" className="underline">
           Login
         </Link>
@@ -111,7 +113,7 @@ const SignUpPage = () => {
               <Button
                 type="submit"
                 className="disabled:bg-primary-green bg-primary h-[3rem] w-full rounded-[50px] disabled:border-transparent"
-                disabled={!termsAgreed || form.formState.isSubmitting}
+                disabled={signupButtonDisabled}
               >
                 Register
                 {/* {loggingDnp ? <ClipLoader color={"#fff"} size={30} /> : "Submit"} */}

@@ -12,8 +12,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const SignInPage = () => {
-  const [termsAgreed, setTermsAgreed] = useState(false);
-
   const defaultValues = {
     fullName: "",
     email: "",
@@ -26,11 +24,9 @@ const SignInPage = () => {
     getValues,
   } = form;
 
-  const handleSubmit = (data: SignupFormData) => {};
+  const loginButtonDisabled = !getValues("email") || !getValues("password") || form.formState.isSubmitting;
 
-  const handleTermsAgreedToggle = (checked: boolean) => {
-    setTermsAgreed(checked => !checked);
-  };
+  const handleSubmit = (data: SignupFormData) => {};
 
   return (
     <div className="px-[8rem] pt-[8rem]">
@@ -67,11 +63,14 @@ const SignInPage = () => {
                 )}
               />
             </div>
+            <div className="mt-2 flex justify-end">
+              <p className="text-muted-foreground text-sm">Forgot password?</p>
+            </div>
             <div className="mt-8">
               <Button
                 type="submit"
                 className="disabled:bg-primary-green bg-primary h-[3rem] w-full rounded-[50px] disabled:border-transparent"
-                disabled={!termsAgreed || form.formState.isSubmitting}
+                disabled={loginButtonDisabled}
               >
                 Log in
                 {/* {loggingDnp ? <ClipLoader color={"#fff"} size={30} /> : "Submit"} */}
