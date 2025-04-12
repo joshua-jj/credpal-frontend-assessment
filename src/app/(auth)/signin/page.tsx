@@ -24,15 +24,16 @@ const SignInPage = () => {
     getValues,
   } = form;
 
-  const loginButtonDisabled = !getValues("email") || !getValues("password") || form.formState.isSubmitting;
+  const loginButtonDisabled = !getValues("email") || !getValues("password")
 
   const handleSubmit = (data: SignupFormData) => {};
 
   return (
     <div className="px-[8rem] pt-[8rem]">
       <p className="text-4xl font-semibold">Sign in to Beam.</p>
+      <p className="text-muted-foreground mt-2">Please sign in with the your assigned login details.</p>
       <p className="text-muted-foreground mt-2">
-        Please sign in with the your assigned login details. Don't have an account?{" "}
+        Don't have an account?{" "}
         <Link href="/signup" className="underline">
           Sign Up
         </Link>

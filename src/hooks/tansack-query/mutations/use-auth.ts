@@ -1,14 +1,16 @@
 import { signUp } from "@/api/auth";
-import { SignUpServerData } from "@/features/auth/types";
+import { SignupFormData } from "@/features/auth/types";
 import { useMutation } from "@tanstack/react-query";
-import { on } from "events";
+import { useRouter } from "next/navigation";
 
 export const useSignUp = () => {
+  const router = useRouter();
   const { mutate: signUpUser, isPending: signUpLoading } = useMutation({
-    mutationFn: (formData: SignUpServerData) => signUp(formData),
+    mutationFn: (formData: SignupFormData) => signUp(formData),
     onSuccess: data => {
       const { accessToken } = data?.data?.data;
       localStorage.setItem("userToken", accessToken);
+      router.push("/dashboard/wallet");
     },
   });
 

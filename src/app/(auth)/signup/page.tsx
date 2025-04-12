@@ -32,18 +32,14 @@ const SignUpPage = () => {
     formState: { errors },
   } = form;
 
-  const signupButtonDisabled = !termsAgreed || form.formState.isSubmitting;
+  const signupButtonDisabled = !termsAgreed || signUpLoading;
 
   const handleSubmit = (data: SignupFormData) => {
-    signUpUser({
-      full_name: data.fullName,
-      email: data.email,
-      password: data.password,
-    });
+    signUpUser(data);
   };
 
   const handleTermsAgreedToggle = (checked: boolean) => {
-    setTermsAgreed(checked => !checked);
+    setTermsAgreed(checked);
   };
 
   return (
@@ -68,7 +64,7 @@ const SignUpPage = () => {
                     <FormControl>
                       <Input
                         {...field}
-                        className={`w-full border ${errors.fullName ? "border-destructive" : "border-input"}`}
+                        className={`w-full ${errors.fullName ? "border-destructive" : "border-input"}`}
                         placeholder="Enter Full Name"
                       />
                     </FormControl>
@@ -85,7 +81,7 @@ const SignUpPage = () => {
                     <FormControl>
                       <Input
                         {...field}
-                        className={`w-full border ${errors.fullName ? "border-destructive" : "border-input"}`}
+                        className={`w-full ${errors.email ? "border-destructive" : "border-input"}`}
                         placeholder="Enter Email Address"
                       />
                     </FormControl>
@@ -102,7 +98,7 @@ const SignUpPage = () => {
                     <FormControl>
                       <PasswordInput
                         {...field}
-                        className={`w-full border ${errors.fullName ? "border-destructive" : "border-input"}`}
+                        className={`w-full ${errors.password ? "border-destructive" : "border-input"}`}
                         placeholder="Enter Password"
                       />
                     </FormControl>
@@ -124,7 +120,7 @@ const SignUpPage = () => {
                 className="disabled:bg-primary-green bg-primary h-[3rem] w-full rounded-[50px] disabled:border-transparent"
                 disabled={signupButtonDisabled}
               >
-                {!signUpLoading ? <ClipLoader color={"#fff"} size={30} /> : "Register"}
+                {signUpLoading ? <ClipLoader color={"#fff"} size={25} /> : "Register"}
               </Button>
             </div>
           </form>

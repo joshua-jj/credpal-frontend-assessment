@@ -1,13 +1,15 @@
 "use client";
 
+import React from "react";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
-import { ComponentProps, useState } from "react";
-import { cn } from "../lib/utils";
+import { type ComponentProps, forwardRef } from "react";
+import { cn } from "@/lib/utils";
 
-const PasswordInput = ({ className, placeholder }: ComponentProps<"input">) => {
-  const [showPassword, setShowPassword] = useState(false);
+const PasswordInput = forwardRef<HTMLInputElement, ComponentProps<"input">>(({ className, placeholder, ...props }, ref) => {
+  const [showPassword, setShowPassword] = React.useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -16,7 +18,7 @@ const PasswordInput = ({ className, placeholder }: ComponentProps<"input">) => {
   return (
     <div className="space-y-2">
       <div className="relative">
-        <Input type={showPassword ? "text" : "password"} placeholder={placeholder} className={cn("pr-10", className)} />
+        <Input type={showPassword ? "text" : "password"} placeholder={placeholder} className={cn("pr-10", className)} ref={ref} {...props} />
         <Button
           type="button"
           variant="ghost"
@@ -30,6 +32,8 @@ const PasswordInput = ({ className, placeholder }: ComponentProps<"input">) => {
       </div>
     </div>
   );
-};
+});
+
+PasswordInput.displayName = "PasswordInput";
 
 export default PasswordInput;
