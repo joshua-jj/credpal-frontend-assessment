@@ -16,8 +16,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        <main>{children}</main>
-        <Toaster />
+        {children}
+        <Toaster position="top-right" />
       </body>
     </html>
   );

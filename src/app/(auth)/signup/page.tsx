@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { SignupFormData } from "@/features/signup/types";
+import { SignupFormData } from "@/features/auth/types";
 import { signupSchema } from "@/schemas/signup";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
