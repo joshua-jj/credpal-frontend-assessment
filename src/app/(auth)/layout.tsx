@@ -2,8 +2,8 @@ import { ReactNode } from "react";
 
 const AuthLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="flex">
-      <div className="w-[38rem]"></div>
+    <div className="flex min-h-screen">
+      <div className="w-[29rem] bg-primary"></div>
       {children}
     </div>
   );
