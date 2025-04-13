@@ -7,6 +7,6 @@ export const signUp = async (formData: SignupFormData) => {
 };
 
 export const signIn = async (formData: SigninFormData) => {
-  const response = await beamApi.post("/auth/signin", formData);
+  const response = await beamApi.post("/auth/login", formData);
   return response?.data;
 };

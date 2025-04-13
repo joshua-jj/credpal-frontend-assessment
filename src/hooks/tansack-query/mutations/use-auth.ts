@@ -1,5 +1,6 @@
 import { signIn, signUp } from "@/api/auth";
 import { SigninFormData, SignupFormData } from "@/features/auth/types";
+import { setToken } from "@/lib/utils";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
@@ -7,9 +8,9 @@ export const useSignUp = () => {
   const router = useRouter();
   const { mutate: signUpUser, isPending: signUpLoading } = useMutation({
     mutationFn: (formData: SignupFormData) => signUp(formData),
-    onSuccess: data => {
+    onSuccess: (data: any) => {
       const { accessToken } = data?.data;
-      localStorage.setItem("userToken", accessToken);
+      setToken(accessToken);
       router.push("/dashboard/wallet");
     },
   });
@@ -21,9 +22,9 @@ export const useSignIn = () => {
   const router = useRouter();
   const { mutate: signInUser, isPending: signInLoading } = useMutation({
     mutationFn: (formData: SigninFormData) => signIn(formData),
-    onSuccess: data => {
+    onSuccess: (data: any) => {
       const { accessToken } = data?.data;
-      localStorage.setItem("userToken", accessToken);
+      setToken(accessToken);
       router.push("/dashboard/wallet");
     },
   });

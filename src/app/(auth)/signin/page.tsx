@@ -18,11 +18,13 @@ const SignInPage = () => {
   };
 
   const form = useForm({ defaultValues });
-  const { getValues } = form;
+  const { email, password } = form.watch();
 
-  const loginButtonDisabled = !getValues("email") || !getValues("password");
+  const loginButtonDisabled = !email || !password || signInLoading;
 
-  const handleSubmit = (data: SigninFormData) => {};
+  const handleSubmit = (data: SigninFormData) => {
+    signInUser(data);
+  };
 
   return (
     <div className="px-[8rem] pt-[8rem]">
