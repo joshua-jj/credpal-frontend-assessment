@@ -1,7 +1,7 @@
 import React from "react";
 
 const DashboardLayout = () => {
-  return <div></div>;
+  return <div className="flex"></div>;
 };
 
 export default DashboardLayout;
