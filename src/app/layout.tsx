@@ -20,7 +20,18 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased`}>
         <Providers>
           <Suspense>{children}</Suspense>
-          <Toaster position="top-right" />
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              unstyled: true,
+              classNames: {
+                error: "bg-red-500 text-white w-[20rem] p-2 rounded flex items-center gap-2 h-[3.5rem]",
+                success: "bg-green-500 text-white w-[20rem] p-2 rounded flex items-center gap-2 h-[3.5rem]",
+                warning: "bg-yellow-500 text-white w-[20rem] p-2 rounded flex items-center gap-2 h-[3.5rem]",
+                info: "bg-blue-500 text-white w-[20rem] p-2 rounded flex items-center gap-2 h-[3.5rem]",
+              },
+            }}
+          />
         </Providers>
       </body>
     </html>

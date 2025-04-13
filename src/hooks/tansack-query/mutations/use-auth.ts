@@ -2,7 +2,9 @@ import { signIn, signUp } from "@/api/auth";
 import { SigninFormData, SignupFormData } from "@/features/auth/types";
 import { setToken } from "@/lib/utils";
 import { useMutation } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export const useSignUp = () => {
   const router = useRouter();
@@ -11,7 +13,17 @@ export const useSignUp = () => {
     onSuccess: (data: any) => {
       const { accessToken } = data?.data;
       setToken(accessToken);
+      setTimeout(() => {
+        toast.success("Signup successful");
+      });
       router.push("/dashboard/wallet");
+    },
+    onError: (error: unknown) => {
+      if (error instanceof AxiosError) {
+        toast.error(error?.response?.data?.message);
+        return;
+      }
+      toast.error("Unable to sign up");
     },
   });
 
@@ -25,7 +37,17 @@ export const useSignIn = () => {
     onSuccess: (data: any) => {
       const { accessToken } = data?.data;
       setToken(accessToken);
+      setTimeout(() => {
+        toast.success("Login successful");
+      });
       router.push("/dashboard/wallet");
+    },
+    onError: (error: unknown) => {
+      if (error instanceof AxiosError) {
+        toast.error(error?.response?.data?.message);
+        return;
+      }
+      toast.error("Unable to sign in");
     },
   });
 
