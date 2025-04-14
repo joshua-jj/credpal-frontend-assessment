@@ -41,13 +41,10 @@ function AvatarFallback({
   return (
     <AvatarPrimitive.Fallback
       data-slot="avatar-fallback"
-      className={cn(
-        "bg-muted flex size-full items-center justify-center rounded-full",
-        className
-      )}
+      className={cn("flex size-full font-semibold text-sm items-center justify-center rounded-full bg-[#FFE6CC] text-[#1F384C]", className)}
       {...props}
     />
-  )
+  );
 }
 
 export { Avatar, AvatarImage, AvatarFallback }

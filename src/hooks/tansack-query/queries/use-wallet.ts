@@ -26,3 +26,4 @@ export const useGetWalletTransactions = () => {
   });
   return { transactionsLoading, transactionsData, transactionsError };
 };
+

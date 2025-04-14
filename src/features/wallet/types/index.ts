@@ -1,3 +1,6 @@
+import { addFundSchema, transferSchema } from "@/schemas/wallet";
+import { z } from "zod";
+
 export type WalletBalanceData = {
   balance: `${string}.${string}`;
 };
@@ -27,4 +30,15 @@ export type WalletTransactionItem = {
   type: string;
   amount: string;
   description: string;
+};
+
+export type AddFundData = z.infer<typeof addFundSchema>;
+export type TransferData = z.infer<typeof transferSchema>;
+
+export type PayNowProps = {
+  handlePayNowOpen: (open: boolean) => void;
+};
+
+export type TransferProps = {
+  handleTransferOpen: (open: boolean) => void;
 };

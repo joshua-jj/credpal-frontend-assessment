@@ -115,11 +115,7 @@ const SignUpPage = () => {
               </div>
             </div>
             <div className="mt-8">
-              <Button
-                type="submit"
-                className="disabled:bg-primary-green bg-primary h-[3rem] w-full rounded-[50px] disabled:border-transparent"
-                disabled={signupButtonDisabled}
-              >
+              <Button type="submit" className="bg-primary h-[3rem] w-full rounded-[50px] disabled:border-transparent" disabled={signupButtonDisabled}>
                 {signUpLoading ? <ClipLoader color={"#fff"} size={25} /> : "Register"}
               </Button>
             </div>

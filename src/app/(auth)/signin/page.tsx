@@ -71,11 +71,7 @@ const SignInPage = () => {
               <p className="text-muted-foreground text-sm">Forgot password?</p>
             </div>
             <div className="mt-8">
-              <Button
-                type="submit"
-                className="disabled:bg-primary-green bg-primary h-[3rem] w-full rounded-[50px] disabled:border-transparent"
-                disabled={loginButtonDisabled}
-              >
+              <Button type="submit" className="bg-primary h-[3rem] w-full rounded-[50px] disabled:border-transparent" disabled={loginButtonDisabled}>
                 {signInLoading ? <ClipLoader color={"#fff"} size={25} /> : "Login"}
               </Button>
             </div>
