@@ -1,3 +1,6 @@
+import { addFundSchema } from "@/schemas/wallet";
+import { z } from "zod";
+
 export type WalletBalanceData = {
   balance: `${string}.${string}`;
 };
@@ -28,3 +31,6 @@ export type WalletTransactionItem = {
   amount: string;
   description: string;
 };
+
+export type AddFundData = z.infer<typeof addFundSchema>;
+

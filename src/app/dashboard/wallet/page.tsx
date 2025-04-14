@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import BalanceSkeleton from "@/features/wallet/components/BalanceSkeleton";
-import PaymentOption from "@/features/wallet/components/PaymentOption";
+import PaymentOption from "@/features/wallet/components/PayNow";
 import TransactionsTableSkeleton from "@/features/wallet/components/TransactionsTableSkeleton";
 import { useGetWalletBalance, useGetWalletTransactions } from "@/hooks/tansack-query/queries/use-wallet";
 import useCopyToClipboard from "@/hooks/use-copy-to-clipboard";

@@ -1,3 +1,4 @@
+import queryClient from "@/config/tansack-query";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -13,4 +14,14 @@ export const setToken = (token: string) => {
 
 export const removeToken = () => {
   localStorage.removeItem("User-Token");
+};
+
+export const invalidateQueries = (queryKeys: string | string[]) => {
+  if (Array.isArray(queryKeys)) {
+    queryKeys.map(key => {
+      queryClient.invalidateQueries({ queryKey: [key] });
+    });
+    return;
+  }
+  queryClient.invalidateQueries({ queryKey: [queryKeys] });
 };
