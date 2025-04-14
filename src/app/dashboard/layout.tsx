@@ -86,10 +86,10 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
     <div className="flex min-h-screen">
       <aside className="bg-primary w-[15rem]">
         <div className="flex items-center gap-3 px-[2rem] pt-4">
-          <div className="bg-beam-yellow flex h-6 w-6 items-center justify-center rounded-full text-[0.75rem] font-bold">B.</div>
-          <p className="text-[0.75rem] font-bold text-white">BEAM</p>
+          <div className="bg-beam-yellow flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold">B.</div>
+          <p className="text-xs font-bold text-white">BEAM</p>
         </div>
-        <Separator className="mt-6 bg-[#C8CBD9]" />
+        <Separator className="mt-6" />
         <div className="mt-10 px-[2rem]">
           <p className="text-[0.68rem] text-white">MAIN</p>
           <nav className="mt-4">
@@ -112,7 +112,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         </div>
         <div className="mt-4 px-4">
           <div className="flex items-center gap-4 rounded-[6px] bg-white p-3.5">
-            <p className="text-[#0D0D0C] text-[0.625rem]">Switch to dark mode</p>
+            <p className="text-[0.625rem] text-[#0D0D0C]">Switch to dark mode</p>
             <Switch />
           </div>
         </div>

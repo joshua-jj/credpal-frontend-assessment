@@ -13,7 +13,7 @@ const NavLink = (props: ComponentProps<typeof Link>) => {
       {...props}
       href={props.href}
       className={cn(
-        "hover:text-beam-yellow flex items-center gap-4 py-2.5 text-white text-[0.75rem]",
+        "hover:text-beam-yellow flex items-center gap-4 py-2.5 text-xs text-white",
         props.className,
         paths[1] === String(props.href).slice(1) && "text-beam-yellow",
       )}
