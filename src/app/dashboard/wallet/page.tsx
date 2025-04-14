@@ -5,12 +5,13 @@ import copyIcon from "@/assets/icons/copy.svg";
 import walletBalanceIcon from "@/assets/icons/wallet-balance.svg";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import BalanceSkeleton from "@/features/wallet/components/BalanceSkeleton";
+import PaymentOption from "@/features/wallet/components/PaymentOption";
+import TransactionsTableSkeleton from "@/features/wallet/components/TransactionsTableSkeleton";
 import { useGetWalletBalance, useGetWalletTransactions } from "@/hooks/tansack-query/queries/use-wallet";
 import useCopyToClipboard from "@/hooks/use-copy-to-clipboard";
 import Image from "next/image";
-import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import TransactionsTableSkeleton from "@/features/wallet/components/TransactionsTableSkeleton";
 
 const WalletPage = () => {
   const accountNumber = "010 210 2020";
@@ -20,43 +21,6 @@ const WalletPage = () => {
   const balanceArray = balanceData?.balance.split(".");
   const balanceInteger = balanceArray ? balanceArray[0] : "0";
   const balanceDecimal = balanceArray ? balanceArray[1] : "0";
-  const invoices = [
-    {
-      invoice: "INV003",
-      paymentStatus: "Unpaid",
-      totalAmount: "$350.00",
-      paymentMethod: "Bank Transfer",
-      date: "2024-10-11",
-    },
-    {
-      invoice: "INV004",
-      paymentStatus: "Paid",
-      totalAmount: "$450.00",
-      paymentMethod: "Credit Card",
-      date: "2024-10-11",
-    },
-    {
-      invoice: "INV005",
-      paymentStatus: "Paid",
-      totalAmount: "$550.00",
-      paymentMethod: "PayPal",
-      date: "2024-10-11",
-    },
-    {
-      invoice: "INV006",
-      paymentStatus: "Pending",
-      totalAmount: "$200.00",
-      paymentMethod: "Bank Transfer",
-      date: "2024-10-11",
-    },
-    {
-      invoice: "INV007",
-      paymentStatus: "Unpaid",
-      totalAmount: "$300.00",
-      paymentMethod: "Credit Card",
-      date: "2024-10-11",
-    },
-  ];
 
   return (
     <div>
@@ -106,9 +70,9 @@ const WalletPage = () => {
               ₦0<span className="text-base text-[#595957]">.00</span>
             </p>
           </div>
-          <div className="mt-4 flex w-full items-center justify-between">
-            <Button className="text-primary bg-beam-yellow hover:bg-beam-yellow text-xs font-medium">Add Funds</Button>
-            <Button className="border border-[#D9D8D5] bg-transparent text-xs font-medium text-[#595957] hover:bg-transparent">Withdrawal</Button>
+          <div className="mt-4 flex items-center gap-4">
+            <Button className="text-primary bg-beam-yellow hover:bg-beam-yellow text-xs font-medium flex-1">Add Funds</Button>
+            <Button className="border border-[#D9D8D5] bg-transparent text-xs font-medium text-[#595957] hover:bg-transparent flex-1">Withdrawal</Button>
           </div>
         </div>
         <div className="flex-1 border-l border-[#D9D8D5] px-[2rem]">
@@ -162,6 +126,7 @@ const WalletPage = () => {
           )}
         </div>
       </div>
+      <PaymentOption />
     </div>
   );
 };

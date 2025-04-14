@@ -12,7 +12,7 @@ const TransactionsTableSkeleton = () => {
           <Skeleton className="h-9 w-[6rem]" />
         </div>
         <div>
-          <Skeleton className="w-[4rem] h-2" />
+          <Skeleton className="h-2 w-[4rem]" />
         </div>
       </div>
       <div className="mt-4">

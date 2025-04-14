@@ -1,19 +1,18 @@
-import NavLink from "@/components/NavLink";
-import { Separator } from "@/components/ui/separator";
-import { ReactNode } from "react";
-import overviewIcon from "@/assets/icons/overview.svg";
 import customersIcon from "@/assets/icons/customers.svg";
-import spotOrdersIcon from "@/assets/icons/spot-orders.svg";
+import helpIcon from "@/assets/icons/help.svg";
+import logoutIcon from "@/assets/icons/logout.svg";
 import marginOrdersIcon from "@/assets/icons/margin-orders.svg";
+import notificationIcon from "@/assets/icons/notification.svg";
+import overviewIcon from "@/assets/icons/overview.svg";
+import settingsIcon from "@/assets/icons/settings.svg";
+import spotOrdersIcon from "@/assets/icons/spot-orders.svg";
 import transactionsIcon from "@/assets/icons/transactions.svg";
 import walletIcon from "@/assets/icons/wallet.svg";
-import notificationIcon from "@/assets/icons/notification.svg";
-import settingsIcon from "@/assets/icons/settings.svg";
-import logoutIcon from "@/assets/icons/logout.svg";
-import helpIcon from "@/assets/icons/help.svg";
-import Image from "next/image";
-import { cn } from "@/lib/utils";
+import NavLink from "@/components/NavLink";
+import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
+import Image from "next/image";
+import { ReactNode } from "react";
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const sidebarMain = [
