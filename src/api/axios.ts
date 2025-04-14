@@ -25,6 +25,7 @@ beamApi.interceptors.response.use(
     const token = getToken();
     if (error.response.status === 401 && !!token) {
       setToken("");
+      window.location.href = "/signin";
     }
 
     return Promise.reject(error);
