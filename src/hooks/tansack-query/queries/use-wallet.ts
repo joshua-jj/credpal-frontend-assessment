@@ -1,10 +1,7 @@
-import { fund, getWalletBalance, getWalletTransactions } from "@/api/wallet";
-import { AddFundData, WalletBalanceData, WalletTransactionsData } from "@/features/wallet/types";
-import { invalidateQueries } from "@/lib/utils";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { getWalletBalance, getWalletTransactions } from "@/api/wallet";
+import { WalletBalanceData, WalletTransactionsData } from "@/features/wallet/types";
+import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { useRouter } from "next/router";
-import { toast } from "sonner";
 
 export const useGetWalletBalance = () => {
   const {

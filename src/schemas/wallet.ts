@@ -10,7 +10,7 @@ export const addFundSchema = z.object({
   expiryDate: z
     .string()
     .min(1, { message: "Please enter card expiry date" })
-    .regex(/^\d{2}\/\d{2}$/, { message: "Expiry date must be in /mm/yy format" }),
+    .regex(/^(0[1-9]|1[0-2])\/\d{2}$/, { message: "Expiry date must be in mm/yy format with month between 01-12" }),
   cvv: z
     .string()
     .trim()
@@ -25,7 +25,11 @@ export const addFundSchema = z.object({
 });
 
 export const transferSchema = z.object({
-  walletId: z.string().trim().min(1, { message: "Please enter email" }),
+  walletId: z
+    .string()
+    .trim()
+    .min(1, { message: "Please enter email" })
+    .regex(/^W-[A-F0-9]{8}$/, { message: "Wallet ID must be in format W- followed by 8 alphanumeric characters" }),
   amount: z
     .string()
     .trim()
