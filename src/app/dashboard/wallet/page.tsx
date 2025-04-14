@@ -83,11 +83,14 @@ const WalletPage = () => {
             </p>
           </div>
           <div className="mt-4 flex items-center gap-4">
-            <Button className="text-primary bg-beam-yellow hover:bg-beam-yellow flex-1 text-xs font-medium" onClick={() => handlePayNowOpen(true)}>
+            <Button className="text-primary bg-beam-yellow hover:bg-beam-yellow/90 flex-1 text-xs font-medium" onClick={() => handlePayNowOpen(true)}>
               Add Funds
             </Button>
-            <Button className="flex-1 border border-[#D9D8D5] bg-transparent text-xs font-medium text-[#595957] hover:bg-transparent">
-              Withdrawal
+            <Button
+              className="hover:border-beam-yellow flex-1 border border-[#D9D8D5] bg-transparent text-xs font-medium text-[#595957] hover:bg-transparent"
+              onClick={() => handleTransferOpen(true)}
+            >
+              Transfer
             </Button>
           </div>
         </div>

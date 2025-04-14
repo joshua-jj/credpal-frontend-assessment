@@ -3,10 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { AddFundData, PayNowProps, TransferData, TransferProps } from "@/features/wallet/types";
+import { Textarea } from "@/components/ui/textarea";
+import { TransferData, TransferProps } from "@/features/wallet/types";
 import { useAppSelector } from "@/hooks/redux";
-import { useFundWallet, useTransfer } from "@/hooks/tansack-query/mutations/use-wallet";
-import { addFundSchema, transferSchema } from "@/schemas/wallet";
+import { useTransfer } from "@/hooks/tansack-query/mutations/use-wallet";
+import { transferSchema } from "@/schemas/wallet";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -14,7 +15,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 const Transfer = ({ handleTransferOpen }: TransferProps) => {
   const { transferringMoney, transferMoney } = useTransfer();
-  const isPayNowOpen = useAppSelector(state => state.dialog.isPayNowOpen);
+  const isTransferOpen = useAppSelector(state => state.dialog.isTransferOpen);
 
   const defaultValues = {
     walletId: "",
@@ -32,19 +33,20 @@ const Transfer = ({ handleTransferOpen }: TransferProps) => {
   } = form;
 
   const handleSubmit = (data: TransferData) => {
-    transferMoney(data);
+    console.log(data);
+    // transferMoney(data);
   };
 
   useEffect(() => {
-    isPayNowOpen || reset(defaultValues);
-  }, [isPayNowOpen, form]);
+    isTransferOpen || reset(defaultValues);
+  }, [isTransferOpen, form]);
 
   return (
     <div>
-      <Dialog open={isPayNowOpen} onOpenChange={handleTransferOpen}>
+      <Dialog open={isTransferOpen} onOpenChange={handleTransferOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Payment Details</DialogTitle>
+            <DialogTitle>Transfer Money</DialogTitle>
           </DialogHeader>
           <div className="-mx-6 grid gap-4 border-t border-[#E6E8F0] px-6 py-4">
             <Form {...form}>
@@ -60,7 +62,7 @@ const Transfer = ({ handleTransferOpen }: TransferProps) => {
                           <Input
                             {...field}
                             className={`w-full focus:outline-none ${errors.walletId ? "border-destructive" : "border-[#D8DAE5]"}`}
-                            placeholder="W-12345678"
+                            placeholder="W-ABCD1234"
                           />
                         </FormControl>
                         <FormMessage />
@@ -91,9 +93,9 @@ const Transfer = ({ handleTransferOpen }: TransferProps) => {
                       <FormItem>
                         <FormLabel className="text-base font-semibold text-[#474D66]">Description (Optional)</FormLabel>
                         <FormControl>
-                          <Input
+                          <Textarea
                             {...field}
-                            className={`w-full focus:outline-none ${errors.description ? "border-destructive" : "border-[#D8DAE5]"}`}
+                            className={`h-[8rem] w-full focus:outline-none ${errors.description ? "border-destructive" : "border-[#D8DAE5]"}`}
                             placeholder="Optional Description"
                           />
                         </FormControl>
