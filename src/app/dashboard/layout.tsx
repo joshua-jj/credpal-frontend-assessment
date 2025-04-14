@@ -83,8 +83,8 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
   ];
 
   return (
-    <div className="flex min-h-screen">
-      <aside className="bg-primary w-[15rem]">
+    <div className="min-h-screen">
+      <aside className="bg-primary fixed top-0 left-0 h-screen w-[15rem]">
         <div className="flex items-center gap-3 px-[2rem] pt-4">
           <div className="bg-beam-yellow flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold">B.</div>
           <p className="text-xs font-bold text-white">BEAM</p>
@@ -117,7 +117,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           </div>
         </div>
       </aside>
-      <div className="px-[2rem] flex-1">{children}</div>
+      <div className="ml-[15rem] px-[2rem]">{children}</div>
     </div>
   );
 };

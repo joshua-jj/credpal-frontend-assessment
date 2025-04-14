@@ -24,35 +24,35 @@ const WalletPage = () => {
       paymentStatus: "Unpaid",
       totalAmount: "$350.00",
       paymentMethod: "Bank Transfer",
-      Date: "2024-10-11",
+      date: "2024-10-11",
     },
     {
       invoice: "INV004",
       paymentStatus: "Paid",
       totalAmount: "$450.00",
       paymentMethod: "Credit Card",
-      Date: "2024-10-11",
+      date: "2024-10-11",
     },
     {
       invoice: "INV005",
       paymentStatus: "Paid",
       totalAmount: "$550.00",
       paymentMethod: "PayPal",
-      Date: "2024-10-11",
+      date: "2024-10-11",
     },
     {
       invoice: "INV006",
       paymentStatus: "Pending",
       totalAmount: "$200.00",
       paymentMethod: "Bank Transfer",
-      Date: "2024-10-11",
+      date: "2024-10-11",
     },
     {
       invoice: "INV007",
       paymentStatus: "Unpaid",
       totalAmount: "$300.00",
       paymentMethod: "Credit Card",
-      Date: "2024-10-11",
+      date: "2024-10-11",
     },
   ];
 
@@ -60,7 +60,7 @@ const WalletPage = () => {
     <div>
       <p className="mb-10 text-2xl font-bold">Wallet</p>
       <Separator className="w-full" />
-      <div className="flex justify-between gap-6 py-[2rem]">
+      <div className="flex gap-6 py-[2rem] pr-[2rem]">
         <div className="w-[23rem]">
           <div className="bg-[#F9F9F7] px-4 py-6">
             <div className="flex items-center justify-between">
@@ -109,10 +109,9 @@ const WalletPage = () => {
             <Button className="border border-[#D9D8D5] bg-transparent text-xs font-medium text-[#595957] hover:bg-transparent">Withdrawal</Button>
           </div>
         </div>
-        <Separator className="w-[30rem]" orientation="vertical" />
-        <div className="px-[2rem]">
+        <div className="flex-1 border-l border-[#D9D8D5] px-[2rem]">
           <p className="mb-4 font-semibold text-[#1F384C]">Transaction History</p>
-          <div className="flex items-center">
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Button className="border border-[#D9D8D5] bg-transparent text-xs font-medium text-[#595957] hover:bg-transparent">3 years</Button>
               <Button className="border border-[#D9D8D5] bg-transparent text-xs font-medium text-[#595957] hover:bg-transparent">Approved</Button>
@@ -123,23 +122,29 @@ const WalletPage = () => {
               <p className="text-sm text-[#8C8C89]">Filter by</p>
             </div>
           </div>
-          <div>
+          <div className="mt-4">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[100px]">Invoice</TableHead>
+                  <TableHead>Transaction ID</TableHead>
+                  <TableHead>Transaction Type</TableHead>
+                  <TableHead>Amount (₦)</TableHead>
                   <TableHead>Status</TableHead>
-                  <TableHead>Method</TableHead>
-                  <TableHead className="text-right">Amount</TableHead>
+                  <TableHead>Date</TableHead>
+                  <TableHead>Action</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {invoices.map(invoice => (
                   <TableRow key={invoice.invoice}>
-                    <TableCell className="font-medium">{invoice.invoice}</TableCell>
+                    <TableCell>{invoice.invoice}</TableCell>
                     <TableCell>{invoice.paymentStatus}</TableCell>
+                    <TableCell>{invoice.totalAmount}</TableCell>
                     <TableCell>{invoice.paymentMethod}</TableCell>
-                    <TableCell className="text-right">{invoice.totalAmount}</TableCell>
+                    <TableCell>{invoice.date}</TableCell>
+                    <TableCell>
+                      <Button>View</Button>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
