@@ -6,15 +6,17 @@ import walletBalanceIcon from "@/assets/icons/wallet-balance.svg";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import BalanceSkeleton from "@/features/wallet/components/BalanceSkeleton";
-import { useGetWalletBalance } from "@/hooks/tansack-query/queries/use-wallet";
+import { useGetWalletBalance, useGetWalletTransactions } from "@/hooks/tansack-query/queries/use-wallet";
 import useCopyToClipboard from "@/hooks/use-copy-to-clipboard";
 import Image from "next/image";
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import TransactionsTableSkeleton from "@/features/wallet/components/TransactionsTableSkeleton";
 
 const WalletPage = () => {
   const accountNumber = "010 210 2020";
   const copyToClipboard = useCopyToClipboard();
   const { balanceLoading, balanceData } = useGetWalletBalance();
+  const { transactionsLoading, transactionsData } = useGetWalletTransactions();
   const balanceArray = balanceData?.balance.split(".");
   const balanceInteger = balanceArray ? balanceArray[0] : "0";
   const balanceDecimal = balanceArray ? balanceArray[1] : "0";
@@ -111,45 +113,53 @@ const WalletPage = () => {
         </div>
         <div className="flex-1 border-l border-[#D9D8D5] px-[2rem]">
           <p className="mb-4 font-semibold text-[#1F384C]">Transaction History</p>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Button className="border border-[#D9D8D5] bg-transparent text-xs font-medium text-[#595957] hover:bg-transparent">3 years</Button>
-              <Button className="border border-[#D9D8D5] bg-transparent text-xs font-medium text-[#595957] hover:bg-transparent">Approved</Button>
-              <Button className="border border-[#D9D8D5] bg-transparent text-xs font-medium text-[#595957] hover:bg-transparent">Pending</Button>
-              <Button className="border-primary text-primary border bg-transparent text-xs font-medium hover:bg-transparent">History</Button>
-            </div>
-            <div>
-              <p className="text-sm text-[#8C8C89]">Filter by</p>
-            </div>
-          </div>
-          <div className="mt-4">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Transaction ID</TableHead>
-                  <TableHead>Transaction Type</TableHead>
-                  <TableHead>Amount (₦)</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Date</TableHead>
-                  <TableHead>Action</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {invoices.map(invoice => (
-                  <TableRow key={invoice.invoice}>
-                    <TableCell>{invoice.invoice}</TableCell>
-                    <TableCell>{invoice.paymentStatus}</TableCell>
-                    <TableCell>{invoice.totalAmount}</TableCell>
-                    <TableCell>{invoice.paymentMethod}</TableCell>
-                    <TableCell>{invoice.date}</TableCell>
-                    <TableCell>
-                      <Button>View</Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
+          {transactionsLoading ? (
+            <TransactionsTableSkeleton />
+          ) : (
+            <>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Button className="border border-[#D9D8D5] bg-transparent text-xs font-medium text-[#595957] hover:bg-transparent">3 years</Button>
+                  <Button className="border border-[#D9D8D5] bg-transparent text-xs font-medium text-[#595957] hover:bg-transparent">Approved</Button>
+                  <Button className="border border-[#D9D8D5] bg-transparent text-xs font-medium text-[#595957] hover:bg-transparent">Pending</Button>
+                  <Button className="border-primary text-primary border bg-transparent text-xs font-medium hover:bg-transparent">History</Button>
+                </div>
+                <div>
+                  <p className="text-sm text-[#8C8C89]">Filter by</p>
+                </div>
+              </div>
+              <div className="mt-4">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Transaction ID</TableHead>
+                      <TableHead>Transaction Type</TableHead>
+                      <TableHead>Amount (₦)</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead>Date</TableHead>
+                      <TableHead>Action</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {transactionsData?.items.map(transaction => (
+                      <TableRow key={transaction.id}>
+                        <TableCell>{transaction.transactionId}</TableCell>
+                        <TableCell>{transaction.type}</TableCell>
+                        <TableCell>{`₦${Number(transaction.amount).toLocaleString()}`}</TableCell>
+                        <TableCell>Approved</TableCell>
+                        <TableCell>{String(transaction.createdAt).slice(0, 10)}</TableCell>
+                        <TableCell>
+                          <Button className="text-primary hover:border-beam-yellow border border-[#D9D8D5] bg-white text-sm font-normal hover:bg-white">
+                            View
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
