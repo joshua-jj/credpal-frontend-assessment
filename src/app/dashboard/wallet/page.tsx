@@ -36,7 +36,7 @@ const WalletPage = () => {
 
   return (
     <div>
-      <p className="mb-10 text-2xl font-bold">Wallet</p>
+      <p className="mt-5 mb-10 text-2xl font-bold">Wallet</p>
       <Separator className="w-full" />
       <div className="flex gap-6 py-[2rem] pr-[2rem]">
         <div className="w-[23rem]">
@@ -107,9 +107,9 @@ const WalletPage = () => {
                   <Button className="border border-[#D9D8D5] bg-transparent text-xs font-medium text-[#595957] hover:bg-transparent">Pending</Button>
                   <Button className="border-primary text-primary border bg-transparent text-xs font-medium hover:bg-transparent">History</Button>
                 </div>
-                <div>
+                {/* <div>
                   <p className="text-sm text-[#8C8C89]">Filter by</p>
-                </div>
+                </div> */}
               </div>
               <div className="mt-4">
                 <Table>

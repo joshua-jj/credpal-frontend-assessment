@@ -82,11 +82,11 @@ const Sidebar = () => {
 
   return (
     <aside className="bg-primary fixed top-0 left-0 h-screen w-[15rem]">
-      <div className="flex h-[2rem] items-center gap-3 px-[2rem] py-6">
+      <div className="flex h-[4rem] items-center gap-3 px-[2rem]">
         <div className="bg-beam-yellow flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold">B.</div>
         <p className="text-xs font-bold text-white">BEAM</p>
       </div>
-      <Separator className="mt-6" />
+      <Separator />
       <div className="mt-10 px-[2rem]">
         <p className="text-[0.68rem] text-white">MAIN</p>
         <nav className="mt-4">
