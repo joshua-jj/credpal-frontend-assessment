@@ -7,7 +7,7 @@ import dialogReducer from "./slices/dialogSlice";
 const persistConfig = {
   key: "auth",
   storage,
-  whitelist: ["user"],
+  whitelist: ["userToken"],
 };
 
 const persistedAuthReducer = persistReducer(persistConfig, authReducer);

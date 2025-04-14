@@ -1,5 +1,5 @@
 import { BEAM_API } from "@/config/env";
-import { getToken } from "@/lib/utils";
+import { getToken, setToken } from "@/lib/utils";
 import axios from "axios";
 
 export const beamApi = axios.create({
@@ -15,6 +15,18 @@ beamApi.interceptors.request.use(
     return config;
   },
   error => {
+    return Promise.reject(error);
+  },
+);
+
+beamApi.interceptors.response.use(
+  response => response,
+  error => {
+    const token = getToken();
+    if (error.response.status === 401 && !!token) {
+      setToken("");
+    }
+
     return Promise.reject(error);
   },
 );
