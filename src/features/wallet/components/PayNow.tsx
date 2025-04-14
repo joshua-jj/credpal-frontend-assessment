@@ -3,15 +3,18 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { AddFundData } from "@/features/wallet/types";
+import { AddFundData, PayNowProps } from "@/features/wallet/types";
+import { useAppSelector } from "@/hooks/redux";
 import { useFundWallet } from "@/hooks/tansack-query/mutations/use-wallet";
 import { addFundSchema } from "@/schemas/wallet";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import ClipLoader from "react-spinners/ClipLoader";
 
-const PayNow = () => {
-  const { fundingWallet, fundWallet } = useFundWallet();
+const PayNow = ({ handlePayNowOpen }: PayNowProps) => {
+  const { fundingWallet, fundWallet, fundWalletSuccess } = useFundWallet();
+  const isPayNowOpen = useAppSelector(state => state.dialog.isPayNowOpen);
 
   const defaultValues = {
     cardNumber: "",
@@ -27,17 +30,20 @@ const PayNow = () => {
 
   const {
     formState: { errors },
+    reset,
   } = form;
-
-  const handlePaymentOptionOpen = (open: boolean) => {};
 
   const handleSubmit = (data: AddFundData) => {
     fundWallet(data);
   };
 
+  useEffect(() => {
+    isPayNowOpen || reset(defaultValues);
+  }, [isPayNowOpen, form]);
+
   return (
     <div>
-      <Dialog open onOpenChange={handlePaymentOptionOpen}>
+      <Dialog open={isPayNowOpen} onOpenChange={handlePayNowOpen}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Payment Details</DialogTitle>

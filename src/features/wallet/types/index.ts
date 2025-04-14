@@ -34,3 +34,6 @@ export type WalletTransactionItem = {
 
 export type AddFundData = z.infer<typeof addFundSchema>;
 
+export type PayNowProps = {
+  handlePayNowOpen: (open: boolean) => void;
+};

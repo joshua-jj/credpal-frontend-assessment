@@ -1,16 +1,25 @@
 import { fund } from "@/api/wallet";
 import { AddFundData } from "@/features/wallet/types";
+import { useAppDispatch } from "@/hooks/redux";
+import { closePayNow } from "@/lib/redux/slices/dialogSlice";
 import { invalidateQueries } from "@/lib/utils";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { toast } from "sonner";
 
 export const useFundWallet = () => {
-  const { mutate: fundWallet, isPending: fundingWallet, isSuccess: fundWalletSuccess } = useMutation({
+  const dispatch = useAppDispatch();
+
+  const {
+    mutate: fundWallet,
+    isPending: fundingWallet,
+    isSuccess: fundWalletSuccess,
+  } = useMutation({
     mutationFn: (formData: AddFundData) => fund(formData),
     onSuccess: (data: any) => {
       toast.success("Wallet funded successfully");
       invalidateQueries(["wallet-balance", "wallet-transactions"]);
+      dispatch(closePayNow());
     },
     onError: (error: unknown) => {
       if (error instanceof AxiosError) {
