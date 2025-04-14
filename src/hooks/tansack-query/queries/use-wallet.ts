@@ -30,21 +30,3 @@ export const useGetWalletTransactions = () => {
   return { transactionsLoading, transactionsData, transactionsError };
 };
 
-export const useFundWallet = () => {
-  const { mutate: fundWallet, isPending: fundingWallet } = useMutation({
-    mutationFn: (formData: AddFundData) => fund(formData),
-    onSuccess: (data: any) => {
-      toast.success("Wallet funded successfully");
-      invalidateQueries('wallet-balance')
-    },
-    onError: (error: unknown) => {
-      if (error instanceof AxiosError) {
-        toast.error(error?.response?.data?.message);
-        return;
-      }
-      toast.error("Unable fund wallet");
-    },
-  });
-
-  return { fundingWallet, fundWallet };
-};

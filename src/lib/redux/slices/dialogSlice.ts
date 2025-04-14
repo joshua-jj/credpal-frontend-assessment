@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: DialogState = {
   isPayNowOpen: false,
+  isTransferOpen: false,
 };
 
 const dialogSlice = createSlice({
@@ -15,9 +16,15 @@ const dialogSlice = createSlice({
     closePayNow: state => {
       state.isPayNowOpen = false;
     },
+    openTransfer: state => {
+      state.isTransferOpen = true;
+    },
+    closeTransfer: state => {
+      state.isTransferOpen = false;
+    },
   },
 });
 
-export const { openPayNow, closePayNow } = dialogSlice.actions;
+export const { openPayNow, closePayNow, openTransfer, closeTransfer } = dialogSlice.actions;
 
 export default dialogSlice.reducer;

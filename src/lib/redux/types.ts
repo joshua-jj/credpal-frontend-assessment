@@ -4,4 +4,5 @@ export type AuthState = {
 
 export type DialogState = {
   isPayNowOpen: boolean;
+  isTransferOpen: boolean;
 };
