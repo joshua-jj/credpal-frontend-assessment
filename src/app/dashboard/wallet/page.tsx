@@ -6,7 +6,7 @@ import walletBalanceIcon from "@/assets/icons/wallet-balance.svg";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import BalanceSkeleton from "@/features/wallet/components/BalanceSkeleton";
-import { useGetWallet } from "@/hooks/tansack-query/queries/use-wallet";
+import { useGetWalletBalance } from "@/hooks/tansack-query/queries/use-wallet";
 import useCopyToClipboard from "@/hooks/use-copy-to-clipboard";
 import Image from "next/image";
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -14,7 +14,7 @@ import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, Tabl
 const WalletPage = () => {
   const accountNumber = "010 210 2020";
   const copyToClipboard = useCopyToClipboard();
-  const { balanceLoading, balanceData } = useGetWallet();
+  const { balanceLoading, balanceData } = useGetWalletBalance();
   const balanceArray = balanceData?.balance.split(".");
   const balanceInteger = balanceArray ? balanceArray[0] : "0";
   const balanceDecimal = balanceArray ? balanceArray[1] : "0";
