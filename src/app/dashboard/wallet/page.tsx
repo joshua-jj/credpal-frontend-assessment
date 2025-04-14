@@ -5,12 +5,56 @@ import copyIcon from "@/assets/icons/copy.svg";
 import walletBalanceIcon from "@/assets/icons/wallet-balance.svg";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import BalanceSkeleton from "@/features/wallet/components/BalanceSkeleton";
+import { useGetWallet } from "@/hooks/tansack-query/queries/use-wallet";
 import useCopyToClipboard from "@/hooks/use-copy-to-clipboard";
 import Image from "next/image";
+import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const WalletPage = () => {
   const accountNumber = "010 210 2020";
   const copyToClipboard = useCopyToClipboard();
+  const { balanceLoading, balanceData } = useGetWallet();
+  const balanceArray = balanceData?.balance.split(".");
+  const balanceInteger = balanceArray ? balanceArray[0] : "0";
+  const balanceDecimal = balanceArray ? balanceArray[1] : "0";
+  const invoices = [
+    {
+      invoice: "INV003",
+      paymentStatus: "Unpaid",
+      totalAmount: "$350.00",
+      paymentMethod: "Bank Transfer",
+      Date: "2024-10-11",
+    },
+    {
+      invoice: "INV004",
+      paymentStatus: "Paid",
+      totalAmount: "$450.00",
+      paymentMethod: "Credit Card",
+      Date: "2024-10-11",
+    },
+    {
+      invoice: "INV005",
+      paymentStatus: "Paid",
+      totalAmount: "$550.00",
+      paymentMethod: "PayPal",
+      Date: "2024-10-11",
+    },
+    {
+      invoice: "INV006",
+      paymentStatus: "Pending",
+      totalAmount: "$200.00",
+      paymentMethod: "Bank Transfer",
+      Date: "2024-10-11",
+    },
+    {
+      invoice: "INV007",
+      paymentStatus: "Unpaid",
+      totalAmount: "$300.00",
+      paymentMethod: "Credit Card",
+      Date: "2024-10-11",
+    },
+  ];
 
   return (
     <div>
@@ -24,9 +68,16 @@ const WalletPage = () => {
               <Image src={walletBalanceIcon} alt="Wallet Icon" height={25} width={25} />
             </div>
             <Separator className="mt-4 mb-8 w-full bg-[#C8D9D1]" />
-            <p className="text-xl font-semibold">
-              ₦200,000<span className="text-base text-[#595957]">.00</span>
-            </p>
+            <div className="text-xl font-semibold">
+              {balanceLoading ? (
+                <BalanceSkeleton />
+              ) : (
+                <>
+                  {`₦${Number(balanceInteger).toLocaleString()}`}
+                  <span className="text-base text-[#595957]">{`.${balanceDecimal}`}</span>
+                </>
+              )}
+            </div>
             <Separator className="mt-8 mb-4 w-full bg-[#C8D9D1]" />
             <div className="flex items-center gap-4">
               <Image src={bankIcon} alt="Bank Icon" height={18} width={18} />
@@ -72,7 +123,28 @@ const WalletPage = () => {
               <p className="text-sm text-[#8C8C89]">Filter by</p>
             </div>
           </div>
-          <div></div>
+          <div>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-[100px]">Invoice</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Method</TableHead>
+                  <TableHead className="text-right">Amount</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {invoices.map(invoice => (
+                  <TableRow key={invoice.invoice}>
+                    <TableCell className="font-medium">{invoice.invoice}</TableCell>
+                    <TableCell>{invoice.paymentStatus}</TableCell>
+                    <TableCell>{invoice.paymentMethod}</TableCell>
+                    <TableCell className="text-right">{invoice.totalAmount}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         </div>
       </div>
     </div>

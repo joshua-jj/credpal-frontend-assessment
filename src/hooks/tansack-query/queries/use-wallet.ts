@@ -3,7 +3,7 @@ import { WalletBalanceData } from "@/features/wallet/types";
 import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-export const useWallet = () => {
+export const useGetWallet = () => {
   const {
     isLoading: balanceLoading,
     data: balanceData,

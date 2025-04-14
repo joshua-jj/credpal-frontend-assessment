@@ -117,7 +117,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           </div>
         </div>
       </aside>
-      <div className="px-[2rem]">{children}</div>
+      <div className="px-[2rem] flex-1">{children}</div>
     </div>
   );
 };

@@ -1,3 +1,3 @@
 export type WalletBalanceData = {
-  balance: string;
+  balance: `${string}.${string}`;
 };
