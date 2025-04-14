@@ -9,10 +9,11 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import BalanceSkeleton from "@/features/wallet/components/BalanceSkeleton";
 import PaymentOption from "@/features/wallet/components/PayNow";
 import TransactionsTableSkeleton from "@/features/wallet/components/TransactionsTableSkeleton";
+import Transfer from "@/features/wallet/components/Transfer";
 import { useAppDispatch } from "@/hooks/redux";
 import { useGetWalletBalance, useGetWalletTransactions } from "@/hooks/tansack-query/queries/use-wallet";
 import useCopyToClipboard from "@/hooks/use-copy-to-clipboard";
-import { closePayNow, openPayNow } from "@/lib/redux/slices/dialogSlice";
+import { closePayNow, closeTransfer, openPayNow, openTransfer } from "@/lib/redux/slices/dialogSlice";
 import Image from "next/image";
 
 const WalletPage = () => {
@@ -27,6 +28,10 @@ const WalletPage = () => {
 
   const handlePayNowOpen = (open: boolean) => {
     dispatch(open ? openPayNow() : closePayNow());
+  };
+
+  const handleTransferOpen = (open: boolean) => {
+    dispatch(open ? openTransfer() : closeTransfer());
   };
 
   return (
@@ -78,7 +83,9 @@ const WalletPage = () => {
             </p>
           </div>
           <div className="mt-4 flex items-center gap-4">
-            <Button className="text-primary bg-beam-yellow hover:bg-beam-yellow flex-1 text-xs font-medium" onClick={() => handlePayNowOpen(true)}>Add Funds</Button>
+            <Button className="text-primary bg-beam-yellow hover:bg-beam-yellow flex-1 text-xs font-medium" onClick={() => handlePayNowOpen(true)}>
+              Add Funds
+            </Button>
             <Button className="flex-1 border border-[#D9D8D5] bg-transparent text-xs font-medium text-[#595957] hover:bg-transparent">
               Withdrawal
             </Button>
@@ -136,6 +143,7 @@ const WalletPage = () => {
         </div>
       </div>
       <PaymentOption handlePayNowOpen={handlePayNowOpen} />
+      <Transfer handleTransferOpen={handleTransferOpen} />
     </div>
   );
 };
