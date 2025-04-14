@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const PayNow = ({ handlePayNowOpen }: PayNowProps) => {
-  const { fundingWallet, fundWallet, fundWalletSuccess } = useFundWallet();
+  const { fundingWallet, fundWallet } = useFundWallet();
   const isPayNowOpen = useAppSelector(state => state.dialog.isPayNowOpen);
 
   const defaultValues = {
@@ -78,7 +78,7 @@ const PayNow = ({ handlePayNowOpen }: PayNowProps) => {
                         <FormControl>
                           <Input
                             {...field}
-                            className={`w-full focus:outline-none ${errors.cardNumber ? "border-destructive" : "border-[#D8DAE5]"}`}
+                            className={`w-full focus:outline-none ${errors.expiryDate ? "border-destructive" : "border-[#D8DAE5]"}`}
                             placeholder="MM/YY"
                           />
                         </FormControl>
@@ -95,7 +95,7 @@ const PayNow = ({ handlePayNowOpen }: PayNowProps) => {
                         <FormControl>
                           <Input
                             {...field}
-                            className={`w-full focus:outline-none ${errors.cardNumber ? "border-destructive" : "border-[#D8DAE5]"}`}
+                            className={`w-full focus:outline-none ${errors.cvv ? "border-destructive" : "border-[#D8DAE5]"}`}
                             placeholder="536"
                           />
                         </FormControl>
@@ -112,7 +112,7 @@ const PayNow = ({ handlePayNowOpen }: PayNowProps) => {
                         <FormControl>
                           <Input
                             {...field}
-                            className={`w-full focus:outline-none ${errors.cardNumber ? "border-destructive" : "border-[#D8DAE5]"}`}
+                            className={`w-full focus:outline-none ${errors.amount ? "border-destructive" : "border-[#D8DAE5]"}`}
                             placeholder="5000.00"
                           />
                         </FormControl>

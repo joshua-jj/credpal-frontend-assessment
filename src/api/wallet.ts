@@ -1,4 +1,4 @@
-import { AddFundData } from "@/features/wallet/types";
+import { AddFundData, TransferData } from "@/features/wallet/types";
 import { beamApi } from "./axios";
 
 export const getWalletBalance = async () => {
@@ -13,5 +13,10 @@ export const getWalletTransactions = async () => {
 
 export const fund = async (formData: AddFundData) => {
   const response = await beamApi.post("/wallets/fund", formData);
+  return response?.data;
+};
+
+export const transfer = async (formData: TransferData) => {
+  const response = await beamApi.post("/wallets/transfer", formData);
   return response?.data;
 };
