@@ -12,7 +12,7 @@ export const useFundWallet = () => {
 
   const { mutate: fundWallet, isPending: fundingWallet } = useMutation({
     mutationFn: (formData: AddFundData) => fund(formData),
-    onSuccess: (data: any) => {
+    onSuccess: () => {
       toast.success("Wallet funded successfully");
       invalidateQueries(["wallet-balance", "wallet-transactions"]);
       dispatch(closePayNow());
@@ -34,7 +34,7 @@ export const useTransfer = () => {
 
   const { mutate: transferMoney, isPending: transferringMoney } = useMutation({
     mutationFn: (formData: TransferData) => transfer(formData),
-    onSuccess: (data: any) => {
+    onSuccess: () => {
       toast.success("Transfer successful");
       invalidateQueries(["wallet-balance", "wallet-transactions"]);
       dispatch(closeTransfer());

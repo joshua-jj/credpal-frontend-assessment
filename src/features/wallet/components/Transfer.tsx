@@ -37,7 +37,9 @@ const Transfer = ({ handleTransferOpen }: TransferProps) => {
   };
 
   useEffect(() => {
-    isTransferOpen || reset(defaultValues);
+    if (!isTransferOpen) {
+      reset(defaultValues);
+    }
   }, [isTransferOpen, form]);
 
   return (

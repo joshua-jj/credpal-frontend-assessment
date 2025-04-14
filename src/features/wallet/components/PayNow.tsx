@@ -38,7 +38,9 @@ const PayNow = ({ handlePayNowOpen }: PayNowProps) => {
   };
 
   useEffect(() => {
-    isPayNowOpen || reset(defaultValues);
+    if (!isPayNowOpen) {
+      reset(defaultValues);
+    }
   }, [isPayNowOpen, form]);
 
   return (
