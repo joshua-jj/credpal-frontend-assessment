@@ -84,7 +84,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="min-h-screen">
       <aside className="bg-primary fixed top-0 left-0 h-screen w-[15rem]">
-        <div className="flex items-center gap-3 px-[2rem] pt-4">
+        <div className="flex items-center gap-3 px-[2rem] h-[2rem] py-6">
           <div className="bg-beam-yellow flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold">B.</div>
           <p className="text-xs font-bold text-white">BEAM</p>
         </div>

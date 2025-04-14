@@ -1,7 +1,7 @@
 import { fund, transfer } from "@/api/wallet";
 import { AddFundData, TransferData } from "@/features/wallet/types";
 import { useAppDispatch } from "@/hooks/redux";
-import { closePayNow } from "@/lib/redux/slices/dialogSlice";
+import { closePayNow, closeTransfer } from "@/lib/redux/slices/dialogSlice";
 import { invalidateQueries } from "@/lib/utils";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
@@ -35,9 +35,9 @@ export const useTransfer = () => {
   const { mutate: transferMoney, isPending: transferringMoney } = useMutation({
     mutationFn: (formData: TransferData) => transfer(formData),
     onSuccess: (data: any) => {
-      toast.success("Wallet funded successfully");
+      toast.success("Transfer successful");
       invalidateQueries(["wallet-balance", "wallet-transactions"]);
-      dispatch(closePayNow());
+      dispatch(closeTransfer());
     },
     onError: (error: unknown) => {
       if (error instanceof AxiosError) {

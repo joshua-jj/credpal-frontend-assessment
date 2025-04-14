@@ -25,11 +25,11 @@ export const addFundSchema = z.object({
 });
 
 export const transferSchema = z.object({
-  walletId: z
+  receiverWalletId: z
     .string()
     .trim()
-    .min(1, { message: "Please enter email" })
-    .regex(/^W-[A-F0-9]{8}$/, { message: "Wallet ID must be in format W- followed by 8 alphanumeric characters" }),
+    .min(1, { message: "Please enter recipient wallet id" })
+    .regex(/^W-[A-Z0-9]{8}$/, { message: "Wallet ID must be in format W- followed by 8 uppercase letters or numbers" }),
   amount: z
     .string()
     .trim()

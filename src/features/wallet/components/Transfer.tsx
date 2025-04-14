@@ -18,7 +18,7 @@ const Transfer = ({ handleTransferOpen }: TransferProps) => {
   const isTransferOpen = useAppSelector(state => state.dialog.isTransferOpen);
 
   const defaultValues = {
-    walletId: "",
+    receiverWalletId: "",
     amount: "",
   };
 
@@ -33,8 +33,7 @@ const Transfer = ({ handleTransferOpen }: TransferProps) => {
   } = form;
 
   const handleSubmit = (data: TransferData) => {
-    console.log(data);
-    // transferMoney(data);
+    transferMoney(data);
   };
 
   useEffect(() => {
@@ -54,14 +53,14 @@ const Transfer = ({ handleTransferOpen }: TransferProps) => {
                 <div className="space-y-4">
                   <FormField
                     control={form.control}
-                    name="walletId"
+                    name="receiverWalletId"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-base font-semibold text-[#474D66]">Wallet ID</FormLabel>
                         <FormControl>
                           <Input
                             {...field}
-                            className={`w-full focus:outline-none ${errors.walletId ? "border-destructive" : "border-[#D8DAE5]"}`}
+                            className={`w-full focus:outline-none ${errors.receiverWalletId ? "border-destructive" : "border-[#D8DAE5]"}`}
                             placeholder="W-ABCD1234"
                           />
                         </FormControl>
